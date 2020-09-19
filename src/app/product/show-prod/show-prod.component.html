@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-end">
+
+  <!-- Modal -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width: 800px;">
+      <div class="modal-content w-100">
+        <div class="modal-header">
+          <h5 class="modal-title w-100" id="productModalLabel">{{ModalTitle}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeProductModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-add-edit-prod [prod]="prod" *ngIf="ActivateAddEditProdComp"></app-add-edit-prod>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter Select and Search Button -->
+<div class="row mt-2">
+  <div class="col-sm-12 col-md-6">
+    <form>
+      <div class="form-group form-inline">
+        <label for="categoryId" class="mr-2">Filter By Category</label>
+        <select class="form-control" id="categoryId" (change)="onChange($event)">
+          <option value="">Show All</option>
+          <option *ngFor="let c of CategoryList" value="{{c.categoryId}}">{{c.categoryName}}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div class="form-inline my-2 justify-content-end">
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" [(ngModel)]="productSearch">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="searchProduct()" [disabled]="!productSearch">Buscar producto</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product Grid -->
+<div class="row row-cols-3 row-cols-md-3">
+  <div *ngFor="let product of productList" class="col mb-4">
+    <div class="card" style="width: 20rem;">
+      <img src="{{product.productPhoto}}" class="card-img-top" alt="{{product.productId}}" width="200" height="200">
+      <div class="card-body">
+        <h5 class="card-title">{{product.productName}}</h5>
+        <p class="card-text">{{product.productDescription}}</p>
+      </div>
+      <div class="card-footer row">
+        <div class="col-auto mr-auto"><small class="text-muted">Price: {{product.productPrice}}$</small></div>
+        <div class="col-auto">
+          <button class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
+          data-target="#productModal" (click)="showProduct(product)" data-backdrop="static" data-keyboard="false">
+            <i class="fa fa-fw fa-eye"></i>
+          </button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-sm btn-outline-primary" (click)="addToCart(product)"> <i class="fa fa-fw fa-plus"></i> </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

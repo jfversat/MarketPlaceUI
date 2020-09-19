@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form>
+        <div class="form-group">
+          <label for="categoryId">Select Category</label>
+          <select class="form-control" id="categoryId" (change)="onChange($event)">
+            <option value="0">Show all categories</option>
+            <option *ngFor="let c of CategoryList" value="{{c.categoryId}}">{{c.categoryName}}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <app-show-prod></app-show-prod>
+    </div>
+  </div>
+</div>

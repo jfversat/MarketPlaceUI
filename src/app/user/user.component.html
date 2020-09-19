@@ -1,0 +1,16 @@
+<div *ngIf="!ifLogged" class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="UserId" aria-label="Search" [(ngModel)]="userId">
+  <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Search" [(ngModel)]="userPass">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="doLogin()" [disabled]="!userId || !userPass">Login</button>
+</div>
+
+<ul class="navbar-nav">
+<li *ngIf="ifLogged" class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{userName}}
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <button class="dropdown-item" (click)="doLogOut()">SignOut</button>
+  </div>
+</li>
+</ul>
